@@ -53,7 +53,7 @@ When you have a few ideas about where to look, come see me and we’ll add them 
 ### Load the data as a dataframe
 
 setwd("/<PATH_TO_FILES>") # insert the path to the "Data" directory
-data<-read.csv("./bullfrogLocs_unfiltered.csv",stringsAsFactors=FALSE,header=TRUE)
+data<-read.csv("./Occurrences/bullfrogLocs_unfiltered.csv",stringsAsFactors=FALSE,header=TRUE)
 
 ### Basic ways to look at the dataframe
 
