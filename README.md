@@ -1,1 +1,2 @@
-# UBC-ENM-Workshop-Fall-2016
+# Welcome to the UBC Ecological Niche Modeling Workshop
+
