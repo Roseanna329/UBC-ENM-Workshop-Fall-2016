@@ -1,2 +1,2 @@
-# Welcome to the UBC Ecological Niche Modeling Workshop
+## Welcome to the UBC Ecological Niche Modeling Workshop
 
