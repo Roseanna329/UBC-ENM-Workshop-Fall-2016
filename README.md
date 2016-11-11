@@ -41,4 +41,5 @@ If you can't figure this out before the first class, please plan to stay a bit l
 
 ### *Questions?*
 
-Contact me: lee-yaw [at] zoology [dot] ubc [dot] ca
+Contact Julie at:
+lee-yaw [at] zoology [dot] ubc [dot] ca
