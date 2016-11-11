@@ -29,7 +29,8 @@ You will specifically learn how to use R to generate niche models with the MAXEN
 -   spThin
 -   rgeos
 -   adehabitatHR
--   spatial.tools
+-   spatial.tools  
+-   PresenceAbsence
 
 In R, you can install packages using the following command:
 
