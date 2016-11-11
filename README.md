@@ -5,11 +5,13 @@ UBC Ecological Niche Modeling Workshop
 In this workshop we will cover the basics of building an ecological niche model.
 You will specifically learn how to use R to generate niche models with the MAXENT algorithm.
 
+
 ### *Course Outline*
 
-**Day 1**: Overview and Data Preparation
-**Day 2**: Model Calibration
-**Day 3**: Model Evaluation and Prediction
+**Day 1**: Overview and Data Preparation  
+**Day 2**: Model Calibration  
+**Day 3**: Model Evaluation and Prediction  
+
 
 ### *Important Information*
 
@@ -39,7 +41,8 @@ You may need to update Java. You also need to follow the instructions for the di
 
 If you can't figure all this out before the first class, please plan to stay a bit longer at the end of the class so we can get you set up.
 
+
 ### *Questions?*
 
-Contact Julie:
+Contact Julie:  
 lee-yaw [at] zoology [dot] ubc [dot] ca
