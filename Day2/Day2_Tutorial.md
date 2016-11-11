@@ -36,7 +36,7 @@ plot(range)
 points(data[,c("decimallongitude","decimallatitude")])
 ```
 
-![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](Figures/unnamed-chunk-2-1.png)
 
 ##### QUESTIONS:
 
@@ -77,7 +77,7 @@ plot(range_laea,add=TRUE)
 points(locs_laea) # note here that because locs_laea is a spatial object, we don't need to specify the coordinates in the points command
 ```
 
-![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](Figures/unnamed-chunk-3-1.png)
 
 ``` r
 # Let's save the projected shapefile so we don't have to do this step again. Note: you may want to quickly repeat the above procedure for the full range...we might need that in subsequent steps.
@@ -117,7 +117,7 @@ data_complete<-cbind(data_complete,pca$x[,1:3])
 plot(data_complete$PC1,data_complete$PC2)
 ```
 
-![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](Figures/unnamed-chunk-4-1.png)
 
 ##### QUESTIONS:
 
@@ -245,7 +245,7 @@ m<-mask(layers[[1]], range_laea)
 plot(m)
 ```
 
-![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](Figures/unnamed-chunk-11-1.png)
 
 ``` r
 # Now we can regularly sample points from within this region to run our correlation analysis
@@ -371,7 +371,7 @@ points(locs[,c("x","y")])
 plot(background,add=TRUE)
 ```
 
-![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](Figures/unnamed-chunk-13-1.png)
 
 ``` r
 ### Mask our environmental layers
@@ -387,7 +387,7 @@ names(calibrationRasters)[1]<-names(layers)[1] # rename the first raster in new 
 plot(calibrationRasters)
 ```
 
-![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-13-2.png)
+![](Figures/unnamed-chunk-13-2.png)
 
 Now we are ready to think about the "maxent"" command in dismo.
 
@@ -427,7 +427,7 @@ prediction<-predict(me,layers) # use the original layers to get predictions acro
 plot(prediction)
 ```
 
-![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-16-1.png)
+![](Figures/unnamed-chunk-16-1.png)
 
 ##### QUESTIONS:
 
