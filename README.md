@@ -2,7 +2,8 @@
 UBC Ecological Niche Modeling Workshop
 ======================================
 
-In this workshop we cover the basics of building an ecological niche model and you will specifically learn how to use R to generate MAXENT niche models.
+In this workshop we will cover the basics of building an ecological niche model.
+You will specifically learn how to use R to generate niche models with the MAXENT algorithm.
 
 ### *Course Outline*
 
