@@ -7,7 +7,7 @@ You will specifically learn how to use R to generate niche models with the MAXEN
 
 ### *Course Outline*
 
-**Day 1**: Preparing data for niche modeling
+**Day 1**: Overview and Data Preparation
 **Day 2**: Model Calibration
 **Day 3**: Model Evaluation and Prediction
 
@@ -37,9 +37,9 @@ install.packages("<PACKAGE_NAME>") # replace <PACKAGE_NAME> with the name of the
 
 You may need to update Java. You also need to follow the instructions for the dismo package carefully: put a copy of the maxent.jar file into the dismo "java" folder (you need to locate your R libraries on your computer).
 
-If you can't figure this out before the first class, please plan to stay a bit longer at the end of the class so we can get you set up.
+If you can't figure all this out before the first class, please plan to stay a bit longer at the end of the class so we can get you set up.
 
 ### *Questions?*
 
-Contact Julie at:
+Contact Julie:
 lee-yaw [at] zoology [dot] ubc [dot] ca
