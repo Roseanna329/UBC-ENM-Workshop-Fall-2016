@@ -3,6 +3,8 @@ Day 2: Tutorial
 
 Today's objective is do a little bit more thinking about the data we use in specific niche modeling projects and to introduce ourselves to niche modeling in R.
 
+NOTE: Please save a version of the Rscript you use in this and subsequent tutorials. Having a record of the specific commands you use and the ways they differ from the ones below (preferrably with comments explaining your decisions) will greatly facilitate any troubleshooting we have to do.
+
 ------------------------------------------------------------------------
 
 ### *Sampling Bias*
@@ -16,18 +18,16 @@ Today's objective is do a little bit more thinking about the data we use in spec
 Let's first examine our records in geographic space.
 
 ``` r
-### Let's first examine our records in geographic space
-
 ### Load all relevant files
-setwd("/<PATH_TO_FILES>") # insert the path to the "Data" directory
+setwd("<PATH_TO_CLASS_FOLDER>") # insert the path to the "Data" directory
 ```
 
 ``` r
 library(maptools)
 
-data<-read.csv("./Occurrences/bullfrogLocs_clean.csv",stringsAsFactors=FALSE,header=TRUE) # By now we have a final set of occurrence records filtered to the native range of the species. 
+data<-read.csv("./Data/Occurrences/bullfrogLocs_clean.csv",stringsAsFactors=FALSE,header=TRUE) # By now we have a final set of occurrence records filtered to the native range of the species. 
 
-range<-readShapePoly("./Range_Maps/bullfrog_NativeRange.shp",proj4string=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")) # The model will be based on the native range.
+range<-readShapePoly("./Data/Range_Maps/bullfrog_NativeRange.shp",proj4string=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")) # The model will be based on the native range.
 
 # Plot the localities overtop the native range
 # Your map will look different from the example below, which is based on only a quick and dirty subset of the records
@@ -36,12 +36,12 @@ plot(range)
 points(data[,c("decimallongitude","decimallatitude")])
 ```
 
-![](Figures/unnamed-chunk-2-1.png)
+![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ##### QUESTIONS:
 
-1.  Are there regions of the native range that are underrepresented?
-2.  Are there regions of the native range that are overrepresented?
+1.  Are there regions of the native range that are under-represented?
+2.  Are there regions of the native range that are over-represented?
 
 ``` r
 ### Let's now examine our records in geographic space
@@ -50,7 +50,7 @@ library(raster)
 
 # Load the environmental layers
 
-files<-list.files(path="./Environmental_Layers",pattern="_final.tif",full.names=TRUE)
+files<-list.files(path="./Data/Environmental_Layers",pattern="_final.tif",full.names=TRUE)
 layers<-stack(files)
 
 # The raster layers are in a different projection than both our occurrence records and range maps. Let's reproject the latter two inputs.
@@ -74,15 +74,15 @@ range_laea<-spTransform(range,CRS=CRS(laea))
 # check that everything looks right
 plot(layers[[1]])
 plot(range_laea,add=TRUE)
-points(locs_laea) # note here that because locs_laea is a spatial object, we don't need to specify the coordinates in the points command
+points(locs_laea) # note here that because locs_laea is a spatial object, we don't need to specify the coordinate columns in the points command
 ```
 
-![](Figures/unnamed-chunk-3-1.png)
+![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 ``` r
 # Let's save the projected shapefile so we don't have to do this step again. Note: you may want to quickly repeat the above procedure for the full range...we might need that in subsequent steps.
 
-writePolyShape(range_laea,"./Range_Maps/bullfrog_NativeRange_laea.shp")
+writePolyShape(range_laea,"./Data/Range_Maps/bullfrog_NativeRange_laea.shp")
 
 # Now let's extract environmental information about our localities so that we can examine them in environmental space 
 
@@ -117,11 +117,11 @@ data_complete<-cbind(data_complete,pca$x[,1:3])
 plot(data_complete$PC1,data_complete$PC2)
 ```
 
-![](Figures/unnamed-chunk-4-1.png)
+![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ##### QUESTIONS:
 
-1.  Are there regions of environmental space that are underrepresented? Is this a problem?
+1.  Are there regions of environmental space that are under-represented? Is this a problem?
 2.  Do we have any obvious clumping of records in environmental space?
 
 #### Thinning Records
@@ -197,7 +197,7 @@ env_thinned<-data_complete[which(row.names(data_complete) %in% row.names(sample)
 ``` r
 ### Save your final (thinned) set of occurrence records (even if you decided not to thin)
 
-write.csv(<DATAFRAME>, "./Occurrences/bullfrogLocs_clean_thinned.csv",row.names=FALSE) # insert the dataframe from above that you think is best 
+write.csv(<DATAFRAME>, "./Data/Occurrences/bullfrogLocs_clean_thinned.csv",row.names=FALSE) # insert the dataframe from above that you think is best 
 ```
 
 ##### ADVANCED CHALLENGE:
@@ -214,7 +214,7 @@ Also Sara Varela has generated this script for this purpose (I haven't had a cha
 
 #### **Exercise D2.2**
 
-1.  Using both the information you have about the species and a correlation analysis, decide on five, biologically relevant variables for inclusion in the niche model.
+1.  Using both the information you have about the species and a correlation analysis, decide on at least three biologically relevant variables for inclusion in the niche model.
 2.  Are there any variables you don't have but think you should?
 
 ``` r
@@ -223,7 +223,7 @@ Also Sara Varela has generated this script for this purpose (I haven't had a cha
 # Get the layers
 library(raster)
 
-files<-list.files(path="./Environmental_Layers",pattern="_final.tif",full.names=TRUE)
+files<-list.files(path="./Data/Environmental_Layers",pattern="_final.tif",full.names=TRUE)
 layers<-stack(files)
 
 # First consider the question at hand: WHERE are we interested in correlations between the variables?
@@ -236,7 +236,7 @@ layers<-stack(files)
 
 # Here's an example using the native species' range.
 
-range_laea<-range<-readShapePoly("./Range_Maps/bullfrog_NativeRange_laea.shp",proj4string=CRS(proj4string(layers)))
+range_laea<-range<-readShapePoly("./Data/Range_Maps/bullfrog_NativeRange_laea.shp",proj4string=CRS(proj4string(layers)))
 
 # Mask the first layer
 
@@ -245,7 +245,7 @@ m<-mask(layers[[1]], range_laea)
 plot(m)
 ```
 
-![](Figures/unnamed-chunk-11-1.png)
+![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 ``` r
 # Now we can regularly sample points from within this region to run our correlation analysis
@@ -293,11 +293,11 @@ high_correlations
 
 ##### QUESTIONS:
 
-1.  Which pairs of variables are highly correlated?
-2.  For each pair highly correlated variables, decide which to keep.
+1.  Which pairs of variables are highly correlated in your version of the analysis?
+2.  For each *pair* of highly correlated variables, decide on one to keep.
 3.  When might we decide not to remove highly correlated variables? When do we have to?
 
-If you think a different background extent is more appropriate for the niche model, you can try out some of the following generate your background extent and then repeat the steps above to test for correlations between your variables.
+If you think a different background extent is more appropriate for the niche model, you can try out some of the following code to generate your background extent and then repeat the steps above to test for correlations between your variables.
 
 ``` r
 ### Different background extents
@@ -328,10 +328,10 @@ m4<-mask(layers[[1]],e)
 pid <- sapply(slot(mcpb, "polygons"), function(x) slot(x, "ID"))
 mcpb_df<-data.frame(ID=1:length(mcpb),row.names=pid)
 mcpb_spd<-SpatialPolygonsDataFrame(mcpb,mcpb_df)
-writePolyShape(mcpb_spd,"./Range_Maps/mcp_range.shp")
+writePolyShape(mcpb_spd,"./Data/Range_Maps/mcp_range.shp")
 ```
 
-If you decided to remove some of your variables. Move them to your "Temp" subfolder from yesterday. Your Environmental\_Layers folder should now only have those variables you will use to build your niche models.
+If you decided to remove some of your variables. Move them to your "Temp" subfolder from yesterday. Your Environmental\_Layers folder should now only have variables you will use to build your niche models.
 
 ------------------------------------------------------------------------
 
@@ -353,16 +353,16 @@ library(maptools)
 
 # Occurrence Records
 
-locs<-read.csv("./Occurrences/bullfrogLocs_clean_thinned.csv",header=TRUE)
+locs<-read.csv("./Data/Occurrences/bullfrogLocs_clean_thinned.csv",header=TRUE)
 
 # Environmental Rasters
 
-files<-list.files(path="./Environmental_Layers",pattern="_final.tif",full.names=TRUE)
+files<-list.files(path="./Data/Environmental_Layers",pattern="_final.tif",full.names=TRUE)
 layers<-stack(files)
 
 # Background extent for modeling
 
-background<-readShapePoly("./Range_Maps/mcp_range.shp") # I'm using the MCP around our locality data as my background extent (you won't have this file unless you saved a similar one), but you can choose whatever background file you decided upon above
+background<-readShapePoly("./Data/Range_Maps/mcp_range.shp") # I'm using the MCP around our locality data as my background extent (you won't have this file unless you saved a similar one), but you can choose whatever background file you decided upon above
 
 # plot everything to make sure it looks good
 
@@ -371,7 +371,7 @@ points(locs[,c("x","y")])
 plot(background,add=TRUE)
 ```
 
-![](Figures/unnamed-chunk-13-1.png)
+![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 ``` r
 ### Mask our environmental layers
@@ -387,7 +387,7 @@ names(calibrationRasters)[1]<-names(layers)[1] # rename the first raster in new 
 plot(calibrationRasters)
 ```
 
-![](Figures/unnamed-chunk-13-2.png)
+![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-13-2.png)
 
 Now we are ready to think about the "maxent"" command in dismo.
 
@@ -412,10 +412,11 @@ NOTE: Some of the parameters in the help file are only relevant to the predicito
 ``` r
 ### Now let's calibrate our first model
 
-me<-maxent(calibrationRasters,locs[,c("x","y")],args=myArgs,path=getwd())
-```
+dir<-"./MaxentModels"
+dir.create(dir)
 
-    ## Loading required namespace: rJava
+me<-maxent(calibrationRasters,locs[,c("x","y")],args=myArgs,path=dir)
+```
 
 Take a look at the different output files produced. The maxent.html file is a particularly important file for a quick summary of the results but quickly look through the other files to familarize yourself with the various outputs.
 
@@ -427,7 +428,7 @@ prediction<-predict(me,layers) # use the original layers to get predictions acro
 plot(prediction)
 ```
 
-![](Figures/unnamed-chunk-16-1.png)
+![](Day2_Tutorial_files/figure-markdown_github/unnamed-chunk-16-1.png)
 
 ##### QUESTIONS:
 
@@ -440,11 +441,7 @@ Finally let's save our model object in case we want to import it back into R to 
 ``` r
 ### Save the model object to file
 
-save(me,file="./model_object")
-
-# The command for importing the model later is:
-
-load("model_ojbect") # Then in R you can refer to it as "me" again.
+save(me,file="./MaxentModels/model_object")
 ```
 
 So we have a model!
