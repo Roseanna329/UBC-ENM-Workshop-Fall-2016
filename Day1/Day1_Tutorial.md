@@ -54,7 +54,7 @@ When you have a few ideas about where to look, come see me and we’ll add them 
 ``` r
 ### Load the data as a dataframe
 
-setwd("/<PATH_TO_CLASS FOLDER>") # insert the path to the directory where you put the "Data" folder
+setwd("/<PATH_TO_CLASS_FOLDER>") # insert the path to the directory where you put the "Data" folder
 data<-read.csv("./Data/Occurrences/bullfrogLocs_unfiltered.csv",stringsAsFactors=FALSE,header=TRUE)
 
 ### Basic ways to look at the dataframe
