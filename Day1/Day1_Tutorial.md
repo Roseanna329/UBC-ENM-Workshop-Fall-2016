@@ -5,6 +5,8 @@ Today's objective is to think about the input data for niche modeling. We will f
 
 We will then move on to an example case study so that we can get learn how to explore and clean occurrence records and prepare raster layers for niche modeling.
 
+NOTE: Please save a version of the Rscript you use in this and subsequent tutorials. Having a record of the specific commands you use and the ways they differ from the ones below (preferrably with comments explaining your decisions) will greatly facilitate any troubleshooting we have to do.
+
 ------------------------------------------------------------------------
 
 ### **Case Study: Predicting Potential Invasion of the American Bullfrog**
@@ -12,7 +14,7 @@ We will then move on to an example case study so that we can get learn how to ex
 Our Mission:
 Use niche models to identify areas of Western North America that are environmentally suitable for the species (i.e. “at risk”).
 
-NOTE: This is a bit of a “choose your own adventure”. You have several modeling decisions to make along the way and I don’t expect everyone to necessarily make the same decisions…or produce the same final model.
+NOTE: This is a bit of a “choose your own adventure”. You have several modeling decisions to make along the way and I don’t expect everyone to necessarily make the same decisions…or produce the same final model. In fact, the results in the tutorials are "quick and dirty". Your models and outputs should at least look different from these.
 
 ------------------------------------------------------------------------
 
@@ -52,8 +54,8 @@ When you have a few ideas about where to look, come see me and we’ll add them 
 ``` r
 ### Load the data as a dataframe
 
-setwd("/<PATH_TO_FILES>") # insert the path to the "Data" directory
-data<-read.csv("./Occurrences/bullfrogLocs_unfiltered.csv",stringsAsFactors=FALSE,header=TRUE)
+setwd("/<PATH_TO_CLASS FOLDER>") # insert the path to the directory where you put the "Data" folder
+data<-read.csv("./Data/Occurrences/bullfrogLocs_unfiltered.csv",stringsAsFactors=FALSE,header=TRUE)
 
 ### Basic ways to look at the dataframe
 
@@ -92,7 +94,7 @@ data_otherCountries<-data[!(data$country %in% NorthAm),]    # get records that a
 
 ### Saving dataframes
 
-write.csv(data_NorthAm,file="./Occurrences/bullfrogLocs_clean_YOURGROUP.csv",row.names=FALSE) # note will save to current directory; provide full path in filename if you want to save to another directory
+write.csv(data_NorthAm,file="./Data/Occurrences/bullfrogLocs_clean_YOURGROUP.csv",row.names=FALSE) # note will save to current directory; provide full path in filename if you want to save to another directory
 ```
 
 A separate tool that may be useful for cleaning and filtering records: <http://openrefine.org>
@@ -109,7 +111,7 @@ For each variable, note the region covered (e.g. county, country, continent)
 
 When you have a list of data sources, come see me and we’ll add them to the class resource page
 
-#### **Exercise D1.5**
+#### **Exercise 1.5**
 
 Back to our case study...
 
@@ -124,19 +126,19 @@ library(raster)
 
 ### load and plot a raster
 
-prism_tmean<-raster("./Environmental_Layers/PRISM_tmean/PRISM_tmean_30yr_normal_800mM2_annual_asc.asc")
+prism_tmean<-raster("./Data/Environmental_Layers/PRISM_tmean/PRISM_tmean_30yr_normal_800mM2_annual_asc.asc")
 plot(prism_tmean)
 ```
 
-![](Figures/unnamed-chunk-2-1.png)
+![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ``` r
 ### load the other four layers and make multi-panel plot of these four
 
-prism_tmax<-raster("./Environmental_Layers/PRISM_tmax/PRISM_tmax_30yr_normal_800mM2_annual_asc.asc")
-prism_tmin<-raster("./Environmental_Layers/PRISM_tmin/PRISM_tmin_30yr_normal_800mM2_annual_asc.asc")
-prism_precip<-raster("./Environmental_Layers/PRISM_precip/PRISM_ppt_30yr_normal_800mM2_annual_asc.asc")
-wetness<-raster("./Environmental_Layers/wetness/na_cti.bil")
+prism_tmax<-raster("./Data/Environmental_Layers/PRISM_tmax/PRISM_tmax_30yr_normal_800mM2_annual_asc.asc")
+prism_tmin<-raster("./Data/Environmental_Layers/PRISM_tmin/PRISM_tmin_30yr_normal_800mM2_annual_asc.asc")
+prism_precip<-raster("./Data/Environmental_Layers/PRISM_precip/PRISM_ppt_30yr_normal_800mM2_annual_asc.asc")
+wetness<-raster("./Data/Environmental_Layers/wetness/na_cti.bil")
 
 # plotting may take awhile...be patient
 
@@ -147,7 +149,7 @@ plot(prism_precip)
 plot(wetness)
 ```
 
-![](Figures/unnamed-chunk-2-2.png)
+![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
 ##### QUESTIONS:
 
@@ -210,22 +212,22 @@ Let's get some alternative temperature and preciptation layers:
 1.  Go to the worldclim website <http://www.worldclim.org/>
 2.  Download the *current BIOCLIM* layers roughly equivalent to tmean (BIO1), tmax (BIO5), tmin(BIO6) and precip (BIO12). Do this BY TILE (e.g. to avoid filling your hard drive), ensuring that you completely cover North America
 3.  If there are other variables that you think may be relevant, feel free to download those
-4.  Create a new directory: "BIOCLIM" within the Data/Environmental\_Layers directory; Move the set tiles for each variable into new folders (e.g. "tmean","tmax"...etc.) in this BIOCLIM directory. You should have a folder for each variable that includes all North American tiles for that variable.
+4.  Create a new directory: "BIOCLIM" within the Data/Environmental\_Layers directory; Move the set of tiles for each variable into new folders (e.g. "tmean","tmax"...etc.) in this BIOCLIM directory. You should have a folder for each variable that includes all North American tiles for that variable.
 
 Now we need to stitch together the tiles for each variable and then process each variable so that we can stack with our wetness variable.
 
 ``` r
 ### First read a couple of rasters and plot them side by side 
 
-r1<-raster("./Environmental_Layers/BIOCLIM/tmean/bio1_01.tif")
-r2<-raster("./Environmental_Layers/BIOCLIM/tmean/bio1_02.tif")
+r1<-raster("./Data/Environmental_Layers/BIOCLIM/tmean/bio1_01.tif")
+r2<-raster("./Data/Environmental_Layers/BIOCLIM/tmean/bio1_02.tif")
 
 par(mfrow=c(1,2))
 plot(r1)
 plot(r2)
 ```
 
-![](Figures/unnamed-chunk-5-1.png)
+![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ``` r
 ### Stitch them together using the "merge" function
@@ -234,14 +236,14 @@ m<-merge(r1,r2)
 plot(m)
 ```
 
-![](Figures/unnamed-chunk-5-2.png)
+![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-5-2.png)
 
 ``` r
 ### We can automate the process
 
 # make a list of all files
 
-files<-list.files(path="./Environmental_Layers/BIOCLIM/tmean/",full.names=TRUE) 
+files<-list.files(path="./Data/Environmental_Layers/BIOCLIM/tmean/",full.names=TRUE) 
 # NOTE: reading rasters doesn't work well with relative path names so just create a list with full path names 
 
 m<-raster(files[1]) # initiate the merged raster by reading in file 1
@@ -262,15 +264,15 @@ plot(tmean)
 
 # save the new raster (I like GeoTiff format)
 
-writeRaster(tmean,"./Environmental_Layers/tmean",format="GTiff")
+writeRaster(tmean,"./Data/Environmental_Layers/tmean",format="GTiff")
 ```
 
 Repeat the merge process above for the other layers
 
-Take a look at the info for one of your merged layers
+Take a look at the info for one of your merged layers.
 Will we be able to "stack" this layer with the wetness layer?
 
-Let's reproject our BIOCLIM layers so that they have the same projection as the wetness layer. We will use the projection of the wetness layer because it is an equal area projection and that's good for niche modeling (more on this another day).
+Let's reproject our BIOCLIM layers so that they have the same projection as the wetness layer. We will use the projection of the wetness layer because it is an equal area projection and that's good for niche modeling (Why is this?).
 
 ``` r
 ### NOTE:
@@ -302,9 +304,10 @@ Then try stacking the projected layers and the wetness layer. Does it work?
 ``` r
 ### An alternative way to align your layers in terms of both projection, extent and resolution is to use the "spatial_sync_raster" from the "spatial.tools" package
 # This might be necessary if the resolutons were different (BIOCLIM and the wetness index are both at the same spatial resolution)
+# Don't do this now but here is some sample code.
 
-library(spatial.tools)
-tmean_laea<-spatial_sync_raster(tmean,wetness,method="bilinear")
+# library(spatial.tools)
+# tmean_laea<-spatial_sync_raster(tmean,wetness,method="bilinear")
 ```
 
 Our final task is to crop the projected rasters to an extent that is appropriate for our case study. Working with smaller rasters will save on processing time and disk space.
@@ -315,14 +318,10 @@ Let's use the maptools package to take a look.
 
 ``` r
 library(maptools)
-```
 
-    ## Checking rgeos availability: TRUE
-
-``` r
 ### Read in the range shapefile (Note: there are two shapefiles, choose the full range in North America)
 
-range<-readShapePoly("./Range_Maps/bullfrog_NorthAmericanRange.shp",proj4string=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
+range<-readShapePoly("./Data/Range_Maps/bullfrog_NorthAmericanRange.shp",proj4string=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
 ```
 
 ``` r
@@ -343,7 +342,7 @@ plot(tmean_laea)
 plot(range_laea,add=TRUE)
 ```
 
-![](Figures/unnamed-chunk-13-1.png)
+![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 ``` r
 ### Using the coordinates and units printed along the axes of the plot as a guide we can decide on a more limited study extent (note we should keep in mind that eventually we want to project across the western USA and Canada so not too limited!)
@@ -354,7 +353,7 @@ plot(range_laea,add=TRUE)
 plot(e,add=TRUE)
 ```
 
-![](Figures/unnamed-chunk-13-2.png)
+![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-13-2.png)
 
 ``` r
 # Does that extent look good? If so we can crop our layers (If not try a different extent until you find one you like)
@@ -367,9 +366,9 @@ plot(tmean_final)
 ```
 
 ``` r
-# all this work! Save those layers
+# all this work! Save those layers. Below is an example of how for mean temperature...
 
-writeRaster(tmean_final, "./Environmental_Layers/tmean_final",format="GTiff")
+writeRaster(tmean_final, "./Data/Environmental_Layers/tmean_final",format="GTiff")
 ```
 
 You can crop all the environmental layers at once using a raster stack.
@@ -378,7 +377,7 @@ You now have all the R commands you need to prepare a final set of rasters for o
 
 Make sure that by tomorrow you have:
 1) A clean version of the subset of occurrence records assigned to you.
-2) At least the four bioclim and one wetness raster projected and cropped (you should be able to stack the rasters, if not, something has gone wrong). Clean up your Environmental\_Layers folder by move everything except these final rasters to a subfolder called "Temp".
+2) At least the four bioclim and one wetness raster projected and cropped (you should be able to stack the rasters, if not, something has gone wrong). Clean up your Environmental\_Layers folder. Make a "Temp" subfolder and move everything except these final rasters to this folder.
 
 ##### ADVANCED CHALLENGE:
 
