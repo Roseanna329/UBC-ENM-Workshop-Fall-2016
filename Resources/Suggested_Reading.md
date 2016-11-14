@@ -17,7 +17,7 @@ Graham, C. H., Silva, N., & Velásquez-Tibatá, J. (2010). Evaluating the potent
 
 Tingley, R., Vallinoto, M., Sequeira, F., & Kearney, M. R. (2014). Realized niche shift during a global biological invasion. Proceedings of the National Academy of Sciences of the United States of America, (20).
 
-### *Thinking about the Locality Data*
+### *Thinking about Locality Data*
 
 Aiello-Lammens, M. E., Boria, R. a., Radosavljevic, A., Vilela, B., & Anderson, R. P. (2015). spThin: an R package for spatial thinning of species occurrence records for use in ecological niche models. Ecography, 38, 1–5.
 
