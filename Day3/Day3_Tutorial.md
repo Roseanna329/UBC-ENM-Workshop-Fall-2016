@@ -477,7 +477,7 @@ The .html files produced by MAXENT give all of this information in a nice visual
 plot(me_LQ05)
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](Figures/unnamed-chunk-10-1.png)
 
 ``` r
 # You can also get the values directly from the MAXENT output file: "maxentResults.csv"
@@ -574,7 +574,7 @@ no_tmax_gain<-results$Training.gain.without.tmax_final
 response(me_LQ05)
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](Figures/unnamed-chunk-11-1.png)
 
 ``` r
 # Plot the densities of presences (red) versus background (blue) for different environmental values. (e.g. Akin to the types of probability density functions MAXENT is using to optimize the model...but not exactly because the algorithm is tranforming the variables)
@@ -582,7 +582,7 @@ response(me_LQ05)
 density(me_LQ05)
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-11-2.png)
+![](Figures/unnamed-chunk-11-2.png)
 
 ##### QUESTIONS:
 
@@ -658,14 +658,14 @@ mess<-mess(layers,vals)
 h<-hist(mess,breaks=10)
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](Figures/unnamed-chunk-12-1.png)
 
 ``` r
 brk<-h$breaks
 plot(mess,breaks=brk,col=rev(terrain.colors(length(brk))))
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-12-2.png)
+![](Figures/unnamed-chunk-12-2.png)
 
 ``` r
 # Let's convert this into a binary map 
@@ -685,7 +685,7 @@ plot(range,add=TRUE)
 points(locs[,c("x","y")])
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-12-3.png)
+![](Figures/unnamed-chunk-12-3.png)
 
 ##### QUESTIONS:
 
@@ -722,7 +722,7 @@ suitMap<-predict(me_LQ05,x=layers)
 plot(suitMap)
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](Figures/unnamed-chunk-13-1.png)
 
 ``` r
 # Let's mask out the regions where extrapolation is a problem.
@@ -736,7 +736,7 @@ plot(full_range_laea,add=TRUE)
 points(locs[,c("x","y")])
 ```
 
-![](Day3_Tutorial_files/figure-markdown_github/unnamed-chunk-13-2.png)
+![](Figures/unnamed-chunk-13-2.png)
 
 ``` r
 ### Let's save a version of this as a PDF so we can compare across the class.
