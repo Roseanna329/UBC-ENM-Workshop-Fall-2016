@@ -130,7 +130,7 @@ prism_tmean<-raster("./Data/Environmental_Layers/PRISM_tmean/PRISM_tmean_30yr_no
 plot(prism_tmean)
 ```
 
-![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](Figures/unnamed-chunk-2-1.png)
 
 ``` r
 ### load the other four layers and make multi-panel plot of these four
@@ -149,7 +149,7 @@ plot(prism_precip)
 plot(wetness)
 ```
 
-![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-2-2.png)
+![](Figures/unnamed-chunk-2-2.png)
 
 ##### QUESTIONS:
 
@@ -227,7 +227,7 @@ plot(r1)
 plot(r2)
 ```
 
-![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](Figures/unnamed-chunk-5-1.png)
 
 ``` r
 ### Stitch them together using the "merge" function
@@ -236,7 +236,7 @@ m<-merge(r1,r2)
 plot(m)
 ```
 
-![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-5-2.png)
+![](Figures/unnamed-chunk-5-2.png)
 
 ``` r
 ### We can automate the process
@@ -342,7 +342,7 @@ plot(tmean_laea)
 plot(range_laea,add=TRUE)
 ```
 
-![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](Figures/unnamed-chunk-13-1.png)
 
 ``` r
 ### Using the coordinates and units printed along the axes of the plot as a guide we can decide on a more limited study extent (note we should keep in mind that eventually we want to project across the western USA and Canada so not too limited!)
@@ -353,7 +353,7 @@ plot(range_laea,add=TRUE)
 plot(e,add=TRUE)
 ```
 
-![](Day1_Tutorial_files/figure-markdown_github/unnamed-chunk-13-2.png)
+![](Figures/unnamed-chunk-13-2.png)
 
 ``` r
 # Does that extent look good? If so we can crop our layers (If not try a different extent until you find one you like)
