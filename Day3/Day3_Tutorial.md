@@ -658,7 +658,6 @@ mess<-mess(layers,vals)
 h<-hist(mess,breaks=10)
 ```
 
-![](Figures/unnamed-chunk-12-1.png)
 
 ``` r
 brk<-h$breaks
