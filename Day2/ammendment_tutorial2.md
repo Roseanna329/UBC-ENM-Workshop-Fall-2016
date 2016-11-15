@@ -71,4 +71,8 @@ data_noNA_east[383,"decimallongitude"]<-data_noNA_east[383,"decimallongitude"]*-
 ### Finally reassign this cleaned up dataframe to the "data" object
 
 data<-data_noNA_east
+
+data$taxa<-"bullfrog"
+
+data<-data[,c("taxa","decimallongitude","decimallatitude","year","stateprovince")]
 ```
