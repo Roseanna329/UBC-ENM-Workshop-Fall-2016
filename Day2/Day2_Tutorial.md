@@ -307,7 +307,7 @@ library(adehabitatHR)
 
 # Minimum convex polygon around the locality data
 
-mcp<-mcp(locs_laea,unit="m",percent=100)
+mcp<-mcp(locs_laea,unin="m",percent=100)
 mcpb<-gBuffer(mcp,width=5000) # put a small buffer on the mcp otherwise, your points on the boundary (including your locality vertices) will be excluded in subsequent analyses
 m2<-mask(layers[[1]], mcpb)
 
