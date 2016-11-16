@@ -7,7 +7,7 @@ Here are some of the sources of data that people in the course came up with:
 
 <http://www.gbif.org>
 
-vertnet.org
+<http://vertnet.org>
 
 ### Amphibians
 
