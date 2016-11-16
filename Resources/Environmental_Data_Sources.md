@@ -13,29 +13,29 @@ Here are some of the potential sources of data that people in the course came up
 
 #### Wetland Data
 
-*Canada*
+*Canada*  
 <http://www.ducks.ca/initiatives/canadian-wetland-inventory/> <http://www.wetlandnetwork.ca/search/category/10405/1/>
 
-*British Columbia, Canada*
+*British Columbia, Canada*  
 <http://www.cmnbc.ca/atlas_gallery/bc-wetlands-atlas>
 
 #### Landcover
 
-*Alberta*
+*Alberta*  
 <http://aep.alberta.ca/forms-maps-services/maps/resource-data-product-catalogue/biophysical.aspx>
 
 #### Climate Data
 
-*Global*
+*Global*  
 <http://www.worldclim.org/>
 <https://crudata.uea.ac.uk/cru/data/hrg/>
 
-*North America*
+*North America*  
 <https://gis.ncdc.noaa.gov/maps/ncei/summaries/daily>
 <https://sites.ualberta.ca/~ahamann/data.html>
 <http://www.prism.oregonstate.edu>
 
-*Maine*
+*Marine*  
 <http://coastwatch.pfel.noaa.gov/data.html>
 <http://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ensoyears.shtml>
 <http://ggweather.com/enso/oni.htm>
@@ -44,7 +44,7 @@ Here are some of the potential sources of data that people in the course came up
 
 #### Crime Data
 
-*USA*
+*USA*  
 <http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/3484>
 
 #### Hydrology
@@ -59,6 +59,6 @@ Here are some of the potential sources of data that people in the course came up
 <http://www.naturalearthdata.com/downloads/>
 <http://earthexplorer.usgs.gov/>
 
-*The following link to many different sources of data*
+*The following link to many different sources of data*  
 <http://freegisdata.rtwilson.com>
 <http://gisgeography.com/best-free-gis-data-sources-raster-vector/>
